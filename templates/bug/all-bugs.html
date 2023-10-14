@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="center" style="margin-top:15px">
+  {% if messages %}
+      {% for message in messages %} <!-- Loop through messages -->
+          {% if message.tags == 'success' %} <!-- Check if message has a 'success' tag -->
+              <div class="chip deep-purple darken-1 white-text">{{ message }}</div> <!-- Display the message -->
+          {% endif %}
+      {% endfor %}
+  {% endif %}
+</div>
+
+<div class="row" style="margin-top:2%">
+  <div class="col l8 offset-l2 m10 offset-m1 s12">
+    <h5 class='center'>All Bugs</h5>
+
+    {% if data %}
+    <!-- Check if there is bug entries available -->
+    <table class="highlight bordered responsive-table" id="bugTable">
+      <thead>
+        <tr>
+          <th>Report Date</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bug in data %}
+        <!-- Loop through bug data -->
+        <tr class="bug-row" data-href="/bug/bug_detail/{{bug.id}}">
+          <!-- Define a clickable row with data-href attribute for bug detail page -->
+          <td>{{ bug.report_date|date:"F j, Y, P" }}</td>
+          <td>{{ bug.description }}</td>
+          <td>{{ bug.get_bug_type_display }}</td>
+          <td>{{ bug.get_status_display }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Add click event listeners to bug rows to navigate to bug detail page
+        const bugRows = document.querySelectorAll(".bug-row");
+        bugRows.forEach(function(row) {
+          row.addEventListener("click", function() {
+            const link = row.getAttribute("data-href");
+            if (link) {
+              window.location.href = link;
+            }
+          });
+        });
+      });
+    </script>
+    {% else %}
+    <div class="col l8 offset-l2 m10 offset-m1 s12">
+      No bugs in the database.
+    </div>
+    <!-- Display a message if there are no bugs in the database -->
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

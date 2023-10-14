@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Include Google Fonts and Materialize CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css'>
+  <!-- Include jQuery and Materialize JavaScript -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js'></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="deep-purple darken-1">
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo center-align">Bug App</a>
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">All bugs</a></li>
+        <li><a href="/bug/add_bug">Report a bug</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Side Navigation (Mobile) -->
+  <ul id="slide-out" class="side-nav deep-purple darken-1 ">
+    <li><a href="/">All Bugs</a></li>
+    <li><a href="/bug/add_bug">Report a bug</a></li>
+  </ul>
+
+  <!-- Content Block -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- Initialize Side Navigation -->
+  <script>
+    $(".button-collapse").sideNav();
+  </script>
+</body>
+</html>
