@@ -10,7 +10,7 @@
 
             <div class="row">
               <div class="input-field col s8">
-                <input type="text" name="description" id="description" class="validate">
+                <input type="text" name="description" id="description" class="validate" required>
                 <label for="description">Description</label>
               </div>
             </div>
@@ -18,7 +18,7 @@
             <div class="row">
               <div class="col s6">
                 <label for="bug_type">Bug type</label>
-                <select class="browser-default" id="bug_type" name="bug_type">
+                <select class="browser-default" id="bug_type" name="bug_type" required>
                   <option value="" disabled selected>Select bug type</option>
                   <option value="error">Error</option>
                   <option value="new_feature">New Feature</option>
@@ -27,7 +27,7 @@
               </div>
               <div class="col s6">
                 <label for="status">Status</label>
-                <select class="browser-default" id="status" name="status">
+                <select class="browser-default" id="status" name="status" required>
                   <option value="" disabled selected>Select bug status</option>
                   <option value="unconfirmed">Unconfirmed</option>
                   <option value="to_do">To Do</option>
@@ -37,39 +37,12 @@
                 </select>
               </div>
             </div>
-
             <div class="center">
               <input type="submit" class="btn deep-purple darken-1 btn-medium" value="Submit Form" style="margin-bottom: 7%;">
             </div>
-
-            <div id="error" class="red-text"></div> <!-- Display error messages in red text -->
           </form>
         </div>
       </div>
     </div>
   </section>
-  <script>
-    $(document).ready(function () {
-      $("select").material_select(); // Initialize Materialize select elements
-    });
-  </script>
-
-  <script>
-    const form = document.getElementById('app-form');
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const description = document.getElementById('description').value;
-      const bug_type = document.getElementById('bug_type').value;
-      const status = document.getElementById('status').value;
-
-      if (description === '' || bug_type === '' || status === '') {
-        const error = document.getElementById('error');
-        error.innerText = 'Please fill all fields.'; // Display an error message if any required field is empty
-      } else {
-        form.submit(); // Submit the form if all fields are filled
-      }
-    });
-  </script>
 {% endblock %}

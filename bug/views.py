@@ -15,7 +15,7 @@ def add_bug(request):
             bug = Bug(description=description, bug_type=bug_type, status=status)
             bug.save()
             messages.success(request, 'Bug added successfully')
-            return redirect('/')
+            return redirect('all_bugs')
         else:
             # If any required field is missing
             return render(request, 'bug/bug-form.html')
